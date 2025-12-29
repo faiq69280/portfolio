@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 8rem;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      color: #9ca3af;
+      font-size: 1.125rem;
+      max-width: 48rem;
+      line-height: 1.75;
+    }
+
+    .headshot {
+      margin-top: 3rem;
+      width: 20rem;
+      height: 20rem;
+      background-color: #1f2937;
+      border-radius: 0.125rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      font-size: 0.75rem;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 8rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      color: #d1d5db;
+    }
+
+    .section-text {
+      color: #9ca3af;
+      line-height: 1.75;
+      max-width: 48rem;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 1px solid #1f2937;
+      padding: 2rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      border-color: #4b5563;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .project-card:hover .project-title {
+      color: #d1d5db;
+    }
+
+    .project-status {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .project-tagline {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      line-height: 1.75;
+    }
+
+    /* Project Detail */
+    .project-detail {
+      display: none;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .project-detail.active {
+      display: block;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #9ca3af;
+      background: none;
+      border: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+      margin-bottom: 3rem;
+      padding: 0;
+      transition: color 0.2s;
+      font-family: inherit;
+    }
+
+    .back-button:hover {
+      color: #e5e7eb;
+    }
+
+    .detail-header {
+      margin-bottom: 3rem;
+    }
+
+    .detail-title {
+      font-size: 1.875rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-status {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .detail-section {
+      margin-bottom: 4rem;
+    }
+
+    .detail-section-title {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      color: #d1d5db;
+    }
+
+    .detail-text {
+      color: #9ca3af;
+      line-height: 1.75;
+    }
+
+    .list-item {
+      color: #9ca3af;
+      line-height: 1.75;
+      padding-left: 1rem;
+      border-left: 1px solid #1f2937;
+      margin-bottom: 0.75rem;
+    }
+
+    .decision {
+      padding-left: 1.5rem;
+      border-left: 1px solid #1f2937;
+      margin-bottom: 2rem;
+    }
+
+    .decision-title {
+      color: #d1d5db;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+      font-size: 1rem;
+    }
+
+    .decision-text {
+      color: #9ca3af;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+
+    .decision-tradeoff {
+      color: #6b7280;
+      font-size: 0.875rem;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* Contact Links */
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: #e5e7eb;
+    }
+
+    .contact-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .home-view, .project-view {
+      display: none;
+    }
+
+    .home-view.active, .project-view.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .container {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HOME VIEW -->
+    <div id="home-view" class="home-view active">
+      <section class="hero">
+        <h1 class="hero-title">Creativity doesn't ask for permission.</h1>
+        <p class="hero-subtitle">
+          From every era, someone chooses to build differently. I'm choosing to be one of them.
+        </p>
+       <img src="headshot.jpg" alt="Portrait" class="headshot" style="object-fit: cover;">
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card" onclick="showProject('ecommerce')">
+            <div class="project-header">
+              <h3 class="project-title">E-Commerce System</h3>
+              <span class="project-status">In Progress</span>
+            </div>
+            <p class="project-tagline">A system built to study real failure scenarios</p>
+          </div>
+
+          <div class="project-card" onclick="showProject('blogging')">
+            <div class="project-header">
+              <h3 class="project-title">Microservices Blogging Platform</h3>
+              <span class="project-status">Completed</span>
+            </div>
+            <p class="project-tagline">Built to understand microservices architecture beyond buzzwords</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">About</h2>
+        <p class="section-text">
+          I'm a backend engineer focused on understanding how real systems behave under pressure. 
+          I build projects to explore architecture trade-offs, failure modes, and the decisions 
+          tutorials don't teach. Each system is a study in what breaks first and why.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-links">
+          <a href="https://linkedin.com" class="contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect width="4" height="12" x="2" y="9"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com" class="contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+              <path d="M9 18c-4.51 2-5-2-7-2"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a href="mailto:contact@example.com" class="contact-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- E-COMMERCE PROJECT VIEW -->
+    <div id="ecommerce-view" class="project-view">
+      <button class="back-button" onclick="showHome()">← Back</button>
+      
+      <div class="detail-header">
+        <h1 class="detail-title">E-Commerce System</h1>
+        <p class="detail-status">In Progress</p>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Problem</h2>
+        <p class="detail-text">
+          Most e-commerce tutorials skip the hard parts: what happens when payment providers timeout, 
+          inventory gets oversold, or orders get stuck in limbo. I built this to understand how real 
+          systems handle these edge cases.
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Architecture</h2>
+        <div class="list-item">Order service manages state transitions through a finite state machine</div>
+        <div class="list-item">Inventory service handles reservations with TTL and deduction logic</div>
+        <div class="list-item">Payment service integrates with external providers, handling success/failure/timeout states</div>
+        <div class="list-item">Event-driven communication for async operations like notifications and auditing</div>
+        <div class="list-item">PostgreSQL for transactional consistency where it matters, Redis for reservation locks</div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Key Decisions</h2>
+        
+        <div class="decision">
+          <h3 class="decision-title">Inventory reservation before payment</h3>
+          <p class="decision-text">
+            Reserve items with a 10-minute TTL. Release on timeout or payment failure. Prevents 
+            overselling without holding stock indefinitely.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: Adds complexity. Alternative would be optimistic deduction with compensation, 
+            but that creates worse UX when stock runs out during checkout.
+          </p>
+        </div>
+
+        <div class="decision">
+          <h3 class="decision-title">Idempotency keys on order creation</h3>
+          <p class="decision-text">
+            Network retries can cause duplicate orders. Idempotency keys ensure the same request 
+            produces the same result.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: Requires key storage and expiration logic. Worth it to prevent double-charging customers.
+          </p>
+        </div>
+
+        <div class="decision">
+          <h3 class="decision-title">Async event processing for non-critical paths</h3>
+          <p class="decision-text">
+            Confirmation emails and analytics don't need to block order completion. Queue them for async processing.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: Eventual consistency. Users might complete checkout before receiving email. Acceptable for this use case.
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Failure Modes</h2>
+        <div class="list-item">Payment provider timeout: order stays in pending state. Built a background job to poll provider status and reconcile.</div>
+        <div class="list-item">Inventory reservation expires during slow checkout: user sees "item no longer available" after payment. Added pre-payment validation step.</div>
+        <div class="list-item">Concurrent requests to same inventory: race condition on stock count. Implemented pessimistic locking for inventory reads during reservation.</div>
+        <div class="list-item">Event processing failure: lost notification events. Added dead letter queue and monitoring.</div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">What's Next</h2>
+        <div class="list-item">Simulate partial outages: database connection pool exhaustion, service degradation</div>
+        <div class="list-item">Implement saga pattern for distributed transactions across order/payment/inventory</div>
+        <div class="list-item">Add OpenTelemetry tracing to visualize request flow through services</div>
+        <div class="list-item">Load test with k6 to identify bottlenecks</div>
+      </div>
+    </div>
+
+    <!-- BLOGGING PROJECT VIEW -->
+    <div id="blogging-view" class="project-view">
+      <button class="back-button" onclick="showHome()">← Back</button>
+      
+      <div class="detail-header">
+        <h1 class="detail-title">Microservices Blogging Platform</h1>
+        <p class="detail-status">Completed</p>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Problem</h2>
+        <p class="detail-text">
+          Microservices are often presented as either a silver bullet or over-engineering. I built 
+          this to understand the actual complexity: service boundaries, data consistency, and when 
+          the cost is worth it.
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Architecture</h2>
+        <div class="list-item">API Gateway handles routing, rate limiting, and request validation</div>
+        <div class="list-item">Auth Service manages users, sessions, JWT tokens</div>
+        <div class="list-item">Content Service handles posts, comments, drafts</div>
+        <div class="list-item">Notification Service processes email/push notifications asynchronously</div>
+        <div class="list-item">Each service has its own PostgreSQL database (no shared schema)</div>
+        <div class="list-item">Redis for session storage and content caching</div>
+        <div class="list-item">RabbitMQ for async messaging between services</div>
+        <div class="list-item">S3 for media uploads with pre-signed URLs</div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Key Decisions</h2>
+        
+        <div class="decision">
+          <h3 class="decision-title">Database per service</h3>
+          <p class="decision-text">
+            Each service owns its data. Changes to one schema don't cascade. Services can scale independently.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: No foreign keys across services. Joins become API calls. Eventual consistency 
+            on reads. Had to implement distributed data patterns.
+          </p>
+        </div>
+
+        <div class="decision">
+          <h3 class="decision-title">Redis cache with TTL</h3>
+          <p class="decision-text">
+            Popular posts get hammered. Cache responses for 60 seconds to reduce database load.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: Stale reads. Cache invalidation on updates is hard. Implemented cache-aside 
+            pattern with write-through on critical paths.
+          </p>
+        </div>
+
+        <div class="decision">
+          <h3 class="decision-title">Async notifications via message queue</h3>
+          <p class="decision-text">
+            Don't block content creation while sending emails. Notifications aren't critical path.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: User publishes post, notification arrives seconds later. Acceptable delay. 
+            Notifications can fail silently—added retry logic and monitoring.
+          </p>
+        </div>
+
+        <div class="decision">
+          <h3 class="decision-title">API Gateway as single entry point</h3>
+          <p class="decision-text">
+            Centralized auth, rate limiting, routing. Services don't need to implement these concerns.
+          </p>
+          <p class="decision-tradeoff">
+            Trade-off: Single point of failure. Adds latency. Worth it for simplified service logic 
+            and consistent security layer.
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Failure Modes</h2>
+        <div class="list-item">Cache stampede: popular post cache expires, 100 requests hit database simultaneously. Added probabilistic early expiration.</div>
+        <div class="list-item">Service-to-service coupling: content service called notification service directly. Changed to event-driven to decouple.</div>
+        <div class="list-item">Distributed transaction complexity: user publishes post, notification fails. Post is live but users aren't notified. Acceptable for this system, but learned about saga patterns.</div>
+        <div class="list-item">S3 upload timeout: large images failed silently. Implemented client-side compression and progress tracking.</div>
+      </div>
+
+      <div class="detail-section">
+        <h2 class="detail-section-title">Lessons Learned</h2>
+        <div class="list-item">Was this worth the complexity? For a blogging platform, probably not. Learned the cost of microservices firsthand.</div>
+        <div class="list-item">Would use this pattern again for: domains with truly independent lifecycles, teams that need autonomous deployment, services that scale differently.</div>
+        <div class="list-item">Would not use for: CRUD apps, small teams, startups finding product-market fit.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showHome() {
+      document.getElementById('home-view').classList.add('active');
+      document.getElementById('ecommerce-view').classList.remove('active');
+      document.getElementById('blogging-view').classList.remove('active');
+      window.scrollTo(0, 0);
+    }
+
+    function showProject(project) {
+      document.getElementById('home-view').classList.remove('active');
+      document.getElementById('ecommerce-view').classList.remove('active');
+      document.getElementById('blogging-view').classList.remove('active');
+      document.getElementById(project + '-view').classList.add('active');
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
